@@ -74,4 +74,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         ExceptionResponseDto exceptionResponse = new ExceptionResponseDto("400", ex.getMessage(), null);
         return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(ReservationAlreadyExists.class)
+    protected ResponseEntity<Object> reservationAlreadyExists(ReservationAlreadyExists ex){
+        log.error("Ilegal number of seats error: {}",ex.getMessage());
+
+        ExceptionResponseDto exceptionResponse = new ExceptionResponseDto("400", ex.getMessage(), null);
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
 }

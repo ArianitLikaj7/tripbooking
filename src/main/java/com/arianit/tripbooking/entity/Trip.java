@@ -46,7 +46,7 @@ public class Trip extends BaseEntity{
 
     @OneToMany(mappedBy = "trip")
     @JsonManagedReference
-    private List<Reservation> reservation;
+    private List<Reservation> reservations;
 
 
 }

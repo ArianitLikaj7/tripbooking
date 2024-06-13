@@ -1,5 +1,6 @@
 package com.arianit.tripbooking.mapper;
 
+import com.arianit.tripbooking.dto.ReservationDto;
 import com.arianit.tripbooking.dto.TripDto;
 import com.arianit.tripbooking.dto.request.TripRequest;
 import com.arianit.tripbooking.dto.updateRequest.TripUpdateRequest;
@@ -8,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.stream.Collectors;
+
 @Component
 @RequiredArgsConstructor
 public class TripMapper
@@ -15,8 +18,15 @@ public class TripMapper
 
     private final ModelMapper mapper;
     @Override
-    public TripDto toDto(Trip entity) {
-        return mapper.map(entity, TripDto.class);
+    public TripDto toDto(Trip trip) {
+        TripDto tripDto = mapper.map(trip, TripDto.class);
+        if (trip.getReservations() != null) {
+            tripDto.setReservationDtoList(trip.getReservations()
+                    .stream()
+                    .map(reservation -> mapper.map(reservation, ReservationDto.class))
+                    .collect(Collectors.toList()));
+        }
+        return tripDto;
     }
 
     @Override

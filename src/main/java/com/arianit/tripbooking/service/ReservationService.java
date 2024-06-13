@@ -9,6 +9,7 @@ import com.arianit.tripbooking.entity.Reservation;
 import com.arianit.tripbooking.entity.Trip;
 import com.arianit.tripbooking.exception.IlegalNumberOfSeatsException;
 import com.arianit.tripbooking.exception.MismatchedInputException;
+import com.arianit.tripbooking.exception.ReservationAlreadyExists;
 import com.arianit.tripbooking.exception.ResourceNotFoundException;
 import com.arianit.tripbooking.mapper.ReservationMapper;
 import jakarta.transaction.Transactional;
@@ -34,6 +35,10 @@ public class ReservationService {
         reservation.setUserId(authenticationService.getLoggedInUser().getUserId());
         mapTripToReservation(request,reservation);
         updateAvailableSeats(request.getTripId(), request.getSeatNumber());
+        if (reservationRepository.existsByUserId(reservation.getUserId())){
+            throw new ReservationAlreadyExists
+                    ("Reservation with user_id: "+ reservation.getUserId()+" in this trip already exist");
+        }
         Reservation reservationInDb = reservationRepository.save(reservation);
         return reservationMapper.toDto(reservationInDb);
     }
@@ -75,7 +80,7 @@ public class ReservationService {
 
     private void updateAvailableSeats(Long tripId, int i) {
         Trip trip = tripService.getEntityById(tripId);
-        int availableSeats = trip.getAvailableSeats() + i;
+        int availableSeats = trip.getAvailableSeats() - i;
         if (availableSeats < 0){
             throw new IlegalNumberOfSeatsException("No available seats left.");
         }

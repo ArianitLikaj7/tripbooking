@@ -58,6 +58,7 @@ public class AuthenticationService {
 
         return CurrentLoggedInUserDto.builder()
                 .userId(loggedUser.getId())
+                .username(loggedUser.getUsername())
                 .firstName(loggedUser.getFirstName())
                 .lastName(loggedUser.getLastName())
                 .role(loggedUser.getRole().name())
