@@ -60,7 +60,6 @@ public class SecurityConfig {
         };
     }
 
-
     @Bean
     public UrlBasedCorsConfigurationSource corsConfigurationSource() {
         final var configuration = new CorsConfiguration();

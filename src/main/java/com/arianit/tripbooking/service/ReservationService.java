@@ -11,6 +11,7 @@ import com.arianit.tripbooking.exception.IlegalNumberOfSeatsException;
 import com.arianit.tripbooking.exception.MismatchedInputException;
 import com.arianit.tripbooking.exception.ResourceNotFoundException;
 import com.arianit.tripbooking.mapper.ReservationMapper;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 
@@ -24,7 +25,8 @@ public class ReservationService {
     private final ReservationMapper reservationMapper;
     private final AuthenticationService authenticationService;
     private final TripService tripService;
-    
+
+    @Transactional
     public ReservationDto create (ReservationRequest request){
         validateSeatAvailability(request.getTripId(), request.getSeatNumber());
         Reservation reservation = reservationMapper.toEntity(request);
