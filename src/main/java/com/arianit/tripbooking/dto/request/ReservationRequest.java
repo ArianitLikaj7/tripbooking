@@ -1,5 +1,6 @@
 package com.arianit.tripbooking.dto.request;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ReservationRequest {
-   private Long tripId;
+   @NotNull private Long tripId;
    private int  seatNumber;
 }
