@@ -11,6 +11,7 @@ import java.util.List;
 @Builder
 public class CurrentLoggedInUserDto {
         private Long userId;
+        private String username;
         private String firstName;
         private String lastName;
         private String email;

@@ -10,6 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TripUpdateRequest {
+    private Long id
     private Long userId;
     private String origin;
     private String destination;
