@@ -42,6 +42,18 @@ public class TripService {
         return tripMapper.toDto(trip);
     }
 
+    public Trip getEntityById(Long id){
+        Trip trip = tripRepository.findById(id)
+                .orElseThrow(()-> new ResourceNotFoundException(
+                        String.format("Trip with %s id not found",id)
+                ));
+        return trip;
+    }
+
+    public void saveEntity(Trip trip) {
+        tripRepository.save(trip);
+    }
+
     public List<TripDto> getAll(){
         List<Trip> trips = tripRepository.findAll();
         return trips.stream()
