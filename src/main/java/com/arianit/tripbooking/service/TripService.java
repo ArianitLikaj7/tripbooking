@@ -30,7 +30,8 @@ public class TripService {
         Trip trip = tripMapper.toEntity(request);
         trip.setCreatedBy(authenticationService.getLoggedInUser().getUsername());
         trip.setUserId(authenticationService.getLoggedInUser().getUserId());
-        return tripMapper.toDto(tripRepository.save(trip));
+        Trip tripInDb = tripRepository.save(trip);
+        return tripMapper.toDto(tripInDb);
     }
 
     public TripDto getById(Long id){

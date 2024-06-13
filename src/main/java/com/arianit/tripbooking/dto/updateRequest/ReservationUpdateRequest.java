@@ -10,6 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ReservationUpdateRequest {
+    private Long id;
     private Long tripId;
     private int  seatNumber;
 }
