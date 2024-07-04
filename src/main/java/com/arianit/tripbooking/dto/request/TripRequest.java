@@ -15,4 +15,5 @@ public class TripRequest {
     private int availableSeats;
     private int totalSeats;
     private String route;
+    private String typeOfTrip;
 }

@@ -39,6 +39,10 @@ public class Trip extends BaseEntity{
     @Column(name = "user_id")
     private Long userId;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type_of_trip")
+    private TripType typeOfTrip;
+
     @ManyToOne
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
     @JsonBackReference

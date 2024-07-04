@@ -18,4 +18,5 @@ public class TripUpdateRequest {
              private int availableSeats;
              private int totalSeats;
              private String route;
+             private String typeOfGastronome;
 }

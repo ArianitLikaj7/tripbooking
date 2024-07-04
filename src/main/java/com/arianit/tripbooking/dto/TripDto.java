@@ -21,6 +21,7 @@ public class TripDto {
     private String destination;
     private int availableSeats;
     private String route;
+    private String typeOfTrip;
     private List<ReservationDto> reservationDtoList;
 
 }
