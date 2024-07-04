@@ -15,8 +15,8 @@ import java.io.IOException;
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-            String oauth2AuthorizationUrl = "/oauth2/authorization/github";
-            response.sendRedirect(oauth2AuthorizationUrl);
+//            String oauth2AuthorizationUrl = "/oauth2/authorization/github";
+//            response.sendRedirect(oauth2AuthorizationUrl);
         log.error("Responding with unauthorized error. Message - {}", authException.getMessage());
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
     }

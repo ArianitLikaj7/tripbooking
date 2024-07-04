@@ -2,6 +2,7 @@ package com.arianit.tripbooking.service;
 
 import com.arianit.tripbooking.dao.TripRepository;
 import com.arianit.tripbooking.dto.TripDto;
+import com.arianit.tripbooking.dto.UserDto;
 import com.arianit.tripbooking.dto.request.PageRequest;
 import com.arianit.tripbooking.dto.request.TripRequest;
 import com.arianit.tripbooking.dto.updateRequest.TripUpdateRequest;
@@ -24,6 +25,7 @@ public class TripService {
     private final TripRepository tripRepository;
     private final TripMapper tripMapper;
     private final AuthenticationService authenticationService;
+    private final UserService userService;
 
     @Transactional
     public TripDto create(TripRequest request){
@@ -55,7 +57,8 @@ public class TripService {
     }
 
     public List<TripDto> getAll(){
-        List<Trip> trips = tripRepository.findAll();
+        UserDto userDto = userService.getCurrentUser();
+        List<Trip> trips = tripRepository.findAllByCreatedBy(userDto.getUsername());
         return trips.stream()
                 .map(tripMapper::toDto)
                 .collect(Collectors.toList());
@@ -79,9 +82,10 @@ public class TripService {
         tripRepository.deleteById(id);
     }
 
-    public Page<TripDto> getAllPagable(@Valid PageRequest pageRequest){
-        return tripRepository.findAll(pageRequest.getPageable()).map(
-                tripMapper::toDto
-        );
-    }
+//    public Page<TripDto> getAllPagable(@Valid PageRequest pageRequest){
+//        UserDto userDto = userService.getCurrentUser();
+//        return tripRepository.findAllByCreatedByPageable(userDto.getUsername(),pageRequest.getPageable()).map(
+//                tripMapper::toDto
+//        );
+//    }
 }

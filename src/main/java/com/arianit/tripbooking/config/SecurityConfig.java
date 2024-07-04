@@ -29,8 +29,7 @@ public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthFilter;
 
     private final AuthenticationProvider authenticationProvider;
-    private final ClientRegistrationRepository clientRegistrationRepository;
-    private final OAuth2AuthorizedClientService authorizedClientService;
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -41,10 +40,6 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(getNoAuthEndpoints()).permitAll()
                         .anyRequest().authenticated()
-                )
-                .oauth2Login(oauth2 -> oauth2
-                        .clientRegistrationRepository(clientRegistrationRepository)
-                        .authorizedClientService(authorizedClientService)
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
@@ -62,8 +57,6 @@ public class SecurityConfig {
                 "/v3/api-docs.yaml",
                 "/swagger-ui.html",
                 "/swagger-ui/**",
-                "api/trips/**",
-                "api/reservations/**"
         };
     }
 

@@ -51,9 +51,9 @@ public class TripController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("/pageable")
-    public ResponseEntity<Page<TripDto>> getTripsPaginated(@Valid PageRequest pageRequest) {
-        Page<TripDto> paginatedTrips = tripService.getAllPagable(pageRequest);
-        return new ResponseEntity<>(paginatedTrips, HttpStatus.OK);
-    }
+//    @GetMapping("/pageable")
+//    public ResponseEntity<Page<TripDto>> getTripsPaginated(@Valid PageRequest pageRequest) {
+//        Page<TripDto> paginatedTrips = tripService.getAllPagable(pageRequest);
+//        return new ResponseEntity<>(paginatedTrips, HttpStatus.OK);
+//    }
 }

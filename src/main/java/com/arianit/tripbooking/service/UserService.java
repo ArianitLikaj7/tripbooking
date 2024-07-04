@@ -11,6 +11,8 @@ import com.arianit.tripbooking.util.ReflectionUtil;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
@@ -63,5 +65,12 @@ public class UserService {
     private void setUserPasswordAndRole(UserRequest request, User user){
       user.setPassword(passwordEncoder.encode(request.getPassword()));
       user.setRole(request.getRole());
+    }
+
+    public UserDto getCurrentUser(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User loggedUser = (User) authentication.getPrincipal();
+
+        return userMapper.toDto(loggedUser);
     }
 }
