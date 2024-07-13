@@ -4,6 +4,7 @@ import com.arianit.tripbooking.dto.AuthenticationResponse;
 import com.arianit.tripbooking.dto.CurrentLoggedInUserDto;
 import com.arianit.tripbooking.dto.request.AuthenticationRequest;
 import com.arianit.tripbooking.dto.request.RefreshTokenRequest;
+import com.arianit.tripbooking.dto.request.RegisterRequest;
 import com.arianit.tripbooking.service.AuthenticationService;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,11 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationResponse> login(
             @RequestBody @NotNull AuthenticationRequest request){
         return new ResponseEntity<>(authenticationService.login(request), HttpStatus.OK);
+    }
+
+    @PostMapping("/register")
+    public void register(@RequestBody @NotNull RegisterRequest request){
+             authenticationService.register(request);
     }
 
     @PostMapping("/refresh")

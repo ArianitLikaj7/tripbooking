@@ -50,6 +50,7 @@ public class SecurityConfig {
     private String[] getNoAuthEndpoints() {
         return new String[] {
                 "api/v1/auth/login",
+                "api/v1/auth/register",
                 "api/v1/users",
                 "/gastronomes/**",
                 "api/v1/auth/refresh",
